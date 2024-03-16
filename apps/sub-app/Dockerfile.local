@@ -1,0 +1,39 @@
+# stage 0
+FROM node:20-alpine as base
+
+WORKDIR /app
+
+COPY . .
+
+# stage 1
+FROM base as build
+
+WORKDIR /app
+
+RUN yarn install --frozen-lockfile
+
+RUN yarn build sub-app
+
+# stage 2
+FROM node:20-alpine
+
+ARG NODE_ENV
+ARG PROJECT_CLUSTER
+
+ENV NODE_ENV=${NODE_ENV}
+ENV PROJECT_CLUSTER=${PROJECT_CLUSTER}
+
+ENV DATABASE_HOST_MONGO='mongodb://mongo:27017/test'
+ENV REDIS_HOST=redis
+ENV REDIS_OPTION='{"host":"redis","port":6379}'
+
+WORKDIR /app
+
+COPY --from=build /app/.env /app/.env
+COPY --from=build /app/package*.json /app/
+COPY --from=build /app/node_modules/ /app/node_modules/
+COPY --from=build /app/dist/ /app/dist/
+
+EXPOSE 9090
+
+CMD [ "yarn", "start:local", "sub-app" ]

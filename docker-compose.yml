@@ -1,0 +1,46 @@
+version: "3.9"
+services:
+  main-app:
+    container_name: main-app
+    build:
+      context: .
+      dockerfile: ./apps/main-app/Dockerfile.${NODE_ENV}
+      args:
+        NODE_ENV: ${NODE_ENV}
+        PROJECT_CLUSTER: ${PROJECT_CLUSTER}
+    platform: linux/x86_64
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongodb
+  sub-app:
+    container_name: sub-app
+    build:
+      context: .
+      dockerfile: ./apps/sub-app/Dockerfile.${NODE_ENV}
+      args:
+        NODE_ENV: ${NODE_ENV}
+        PROJECT_CLUSTER: ${PROJECT_CLUSTER}
+    platform: linux/x86_64
+    ports:
+      - 9090:9090
+    depends_on:
+      - mongodb
+      - main-app
+  mongodb:
+    restart: always
+    image: mongo:7.0
+    container_name: mongo
+    environment:
+      MONGO_INITDB_DATABASE: chat
+    ports:
+      - 27017:27017
+    volumes:
+      - test_mongo:/data/db
+  redis:
+    image: redis:7.2
+    container_name: redis
+    ports:
+      - 6379:6379
+volumes:
+  test_mongo:
