@@ -27,10 +27,13 @@
     "@nestjs/platform-express": "^9.0.0",
     "@types/joi": "^17.2.3",
     "@types/mongoose": "^5.11.97",
+    "@types/pino-http": "^5.8.4",
     "@types/ramda": "^0.29.11",
     "cross-env": "^7.0.3",
     "joi": "^17.12.2",
     "mongoose": "^8.2.1",
+    "nestjs-pino": "^4.0.0",
+    "pino-http": "^9.0.0",
     "ramda": "^0.29.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
@@ -79,7 +82,9 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "^@lib/config(|/.*)$": "<rootDir>/libs/config/src/$1"
+      "^@lib/config(|/.*)$": "<rootDir>/libs/config/src/$1",
+      "^@lib/database(.*)$": "<rootDir>/libs/database/src/$1",
+      "^@lib/log/(.*)$": "<rootDir>/libs/log/src/$1"
     }
   }
 }

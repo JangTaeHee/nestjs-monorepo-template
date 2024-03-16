@@ -30,6 +30,12 @@
       "@lib/database/*": [
         "libs/database/src/*"
       ],
+      "@lib/log": [
+        "libs/log/src"
+      ],
+      "@lib/log/*": [
+        "libs/log/src/*"
+      ],
     }
   }
 }
