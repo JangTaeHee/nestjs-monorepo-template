@@ -12,8 +12,10 @@ import configuration from './main-app-configuration';
       load: [configuration],
       validationSchema: Joi.object({
         NODE_ENV: Joi.string().default('local'),
-        MAIN_APP_NAME: Joi.string().default('main'),
+        MAIN_APP_NAME: Joi.string().default('main-app'),
         MAIN_APP_PORT: Joi.number().default(8080),
+        SWAGGER_USER: Joi.string().default('test'),
+        SWAGGER_PASSWORD: Joi.string().default('test'),
       }),
     }),
   ],

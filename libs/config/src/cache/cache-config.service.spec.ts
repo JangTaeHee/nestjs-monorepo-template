@@ -1,11 +1,11 @@
 import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as Joi from 'joi';
-import { MainAppConfigService } from './main-app-config.service';
-import configuration from './main-app-configuration';
+import { CacheConfigService } from './cache-config.service';
+import configuration from './cache-configuration';
 
-describe('MainConfigService', () => {
-  let service: MainAppConfigService;
+describe('MqttConfigService', () => {
+  let service: CacheConfigService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -14,17 +14,17 @@ describe('MainConfigService', () => {
           load: [configuration],
           validationSchema: Joi.object({
             NODE_ENV: Joi.string().default('local'),
-            MAIN_APP_NAME: Joi.string().default('main-app'),
-            MAIN_APP_PORT: Joi.number().default(8080),
-            SWAGGER_USER: Joi.string().default('test'),
-            SWAGGER_PASSWORD: Joi.string().default('test'),
+            REDIS_NAME: Joi.string().default('redis'),
+            REDIS_OPTION: Joi.string().default(
+              '{"host":"127.0.0.1","port":6379}',
+            ),
           }),
         }),
       ],
-      providers: [MainAppConfigService],
+      providers: [CacheConfigService],
     }).compile();
 
-    service = module.get<MainAppConfigService>(MainAppConfigService);
+    service = module.get<CacheConfigService>(CacheConfigService);
   });
 
   it('should be defined', () => {
@@ -33,7 +33,7 @@ describe('MainConfigService', () => {
 
   describe('get config', () => {
     it('should return env', async () => {
-      expect(service.name).toBe(process.env.MAIN_APP_NAME);
+      expect(service.env).toBe(process.env.NODE_ENV);
     });
   });
 });

@@ -14,8 +14,10 @@ describe('SubConfigService', () => {
           load: [configuration],
           validationSchema: Joi.object({
             NODE_ENV: Joi.string().default('local'),
-            SUB_APP_NAME: Joi.string().default('sub'),
+            SUB_APP_NAME: Joi.string().default('sub-app'),
             SUB_APP_PORT: Joi.number().default(9090),
+            SWAGGER_USER: Joi.string().default('test'),
+            SWAGGER_PASSWORD: Joi.string().default('test'),
           }),
         }),
       ],

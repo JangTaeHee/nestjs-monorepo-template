@@ -36,6 +36,9 @@ export class Organization extends Document {
   @Prop({ required: false })
   email: boolean;
 
+  @Prop({ required: true, unique: true })
+  apiKey: string;
+
   @Prop()
   createdAt?: Date;
 

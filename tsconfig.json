@@ -36,6 +36,24 @@
       "@lib/log/*": [
         "libs/log/src/*"
       ],
+      "@lib/swagger": [
+        "libs/swagger/src"
+      ],
+      "@lib/swagger/*": [
+        "libs/swagger/src/*"
+      ],
+      "@lib/exception": [
+        "libs/exception/src"
+      ],
+      "@lib/exception/*": [
+        "libs/exception/src/*"
+      ],
+      "@lib/cache": [
+        "libs/cache/src"
+      ],
+      "@lib/cache/*": [
+        "libs/cache/src/*"
+      ],
     }
   }
 }

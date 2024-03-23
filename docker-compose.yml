@@ -32,7 +32,7 @@ services:
     image: mongo:7.0
     container_name: mongo
     environment:
-      MONGO_INITDB_DATABASE: chat
+      MONGO_INITDB_DATABASE: test
     ports:
       - 27017:27017
     volumes:
