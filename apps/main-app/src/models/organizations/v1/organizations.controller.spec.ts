@@ -1,4 +1,4 @@
-import { DataServicesModule } from '@database/data-services.module';
+import { DataServicesModule } from '@lib/database';
 import { Test, TestingModule } from '@nestjs/testing';
 import { OrganizationsController } from './organizations.controller';
 import { OrganizationsService } from './organizations.service';
